@@ -53,9 +53,7 @@
 }
 
 .list-container ul li .buttons button {
-  z-index: 10;
   height: 50px;
-  position: relative;
   box-shadow: 0 10px 2px 0 rgba(0, 0, 0, 0,05);
   border: 0;
   border-radius: 4px;
@@ -91,3 +89,52 @@
   width: 40%;
   height: auto;
 }
+
+.match-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.match-container strong {
+  font-size: 32px;
+  color: #fff;
+}
+
+.match-container p {
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 30px;
+  max-width: 400px;
+  color: rgba(255, 255, 255, 0.8);
+}
+.match-container button {
+  border: none;
+  background: none;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.match-container .itsamatch {
+  max-width: 400px;
+  height: auto;
+}
+
+.match-container .avatar {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  margin: 30px 0;
+}
+
