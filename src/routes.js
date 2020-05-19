@@ -1,14 +1,18 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
+import Signup from './components/Signup';
+import Home from './components/Home';
 import Login from './pages/Login';
-import List from './pages/List';
 
 export default function Routes() {
   return (
-    <BrowserRouter>
-      <Route path="/" exact component={Login} />
-      <Route path="/list/:id" component={List} />
-    </BrowserRouter>
+  <Router>
+    <Switch>
+      <Route path="/" exact component={Login}/>
+      <Route path="/signup" component={Signup}/>
+      <Route path="/home" component={Home}/>
+    </Switch>
+  </Router>
   );
 }
