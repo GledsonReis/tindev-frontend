@@ -42,9 +42,9 @@ export default function Login({ history }) {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <button type="submit">Enviar</button>
+        <button type="submit">Entrar</button>
+        <a href={window.location.href} className="button-link" onClick={e => handlerClick(e)}>Criar Conta</a>
       </form>
-      <button type="button" onClick={e => handlerClick(e)}>Cadastrar</button>
     </div>
   );  
 }

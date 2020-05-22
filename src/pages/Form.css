@@ -1,0 +1,93 @@
+.login-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container form {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container .avatar {
+  margin: 10px auto;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+
+.login-container .logo {
+  width: 100%;
+  height: auto;
+}
+
+.login-container form input {
+  margin-top: 20px;
+  border: 1px solid;
+  border-radius: 4px;
+  height: 48px;
+  padding: 0 20px;
+  font-size: 16px;
+  color: #666;
+}
+
+.login-container form input[readonly] {
+  color: #666;
+  background-color: #ccc;
+}
+
+.login-container form textarea{
+  margin-top: 20px;
+  border: 1px solid;
+  border-radius: 4px;
+  height: 80px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #666;
+}
+
+.login-container form textarea::placeholder{
+  color: #999;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-container form button {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 4px;
+  height: 48px;
+  font-size: 16px;
+  color: white;
+  background-color: #00dd80;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;          
+  height: 40px;
+}
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  color: red;
+}
