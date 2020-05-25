@@ -55,5 +55,31 @@ app.post("/authenticate", (req, res) => {
     });
 });
 
+app.post("/register", (req, res) => {
+  const { user } = req.body;
+
+  const newUser = { 'user': user };
+
+  // Request to exchange code for an access token
+  fetch(`http://localhost:5000/api/signup`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(newUser)
+  })
+    .then(response => response.json())
+    .then(response => {
+      if (response.status == 422) {
+        return res.status(422).json(response);
+      } else {
+        return res.status(200).json(response);
+      }
+    })
+    .catch(error => {
+      return res.status(400).json(error);
+    });
+});
+
 const PORT = process.env.SERVER_PORT || 3001;
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

@@ -32,7 +32,7 @@ export default function Signup() {
       const proxy_url = state.proxy_url;
 
       // Use code parameter and other parameters to make POST request to proxy_server
-      fetch(proxy_url, {
+      fetch(proxy_url+"/authenticate", {
         method: "POST",
         body: JSON.stringify(requestData)
       })
@@ -53,7 +53,7 @@ export default function Signup() {
   }, [state, dispatch, data]);
 
   if (state.isLoggedIn) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/register" />;
   }
 
   return (
