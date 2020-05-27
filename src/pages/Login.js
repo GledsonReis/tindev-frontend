@@ -24,7 +24,7 @@ export default function Login({ history }) {
   function handlerClick(e){
     e.preventDefault();
 
-    history.push('/signup')
+    history.push('/register')
   }
 
   return (
@@ -43,7 +43,7 @@ export default function Login({ history }) {
           onChange={e => setPassword(e.target.value)}
         />
         <button type="submit">Entrar</button>
-        <a href={window.location.href} className="button-link" onClick={e => handlerClick(e)}>Criar Conta</a>
+        <a href={window.location.href} onClick={e => handlerClick(e)}>Criar Conta</a>
       </form>
     </div>
   );  

@@ -1,30 +1,30 @@
-.login-container {
+.signup-container {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.login-container form {
+.signup-container form {
   width: 100%;
   max-width: 300px;
   display: flex;
   flex-direction: column;
 }
 
-.login-container .avatar {
+.signup-container .avatar {
   margin: 10px auto;
   height: 150px;
   width: 150px;
   border-radius: 50%;
 }
 
-.login-container .logo {
+.signup-container .logo {
   width: 100%;
   height: auto;
 }
 
-.login-container form input {
+.signup-container form input {
   margin-top: 20px;
   border: 1px solid;
   border-radius: 4px;
@@ -34,12 +34,12 @@
   color: #666;
 }
 
-.login-container form input[readonly] {
+.signup-container form input[readonly] {
   color: #666;
   background-color: #ccc;
 }
 
-.login-container form textarea{
+.signup-container form textarea{
   margin-top: 20px;
   border: 1px solid;
   border-radius: 4px;
@@ -49,19 +49,49 @@
   color: #666;
 }
 
-.login-container form textarea::placeholder{
+.signup-container form textarea::placeholder{
   color: #999;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.login-container form button {
+.signup-container form .success {
   margin-top: 10px;
   border: 0;
   border-radius: 4px;
   height: 48px;
   font-size: 16px;
   color: white;
-  background-color: #00dd80;
+  background-color: #4b0082;
+}
+
+.signup-container form .cancel {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 4px;
+  height: 48px;
+  font-size: 16px;
+  color: white;
+  background-color: #e22222;
+}
+
+.signup-container form .gitbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 4px;
+  height: 48px;
+  background-color: #000000;
+}
+
+.signup-container form .gitbutton a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
 }
 
 .loader-container {
