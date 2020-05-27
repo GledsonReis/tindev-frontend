@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../App";
 import './Form.css';
+import api from '../services/api';
 
 import Logo from '../assets/logo.svg';
 
@@ -22,8 +23,7 @@ export default function Form({history}) {
     e.preventDefault();
     setData({ ...data, isLoading: true });
 
-    const requestData = {
-      user: {
+    const user = {
         email: newUser.email,
         password: newUser.password,
         password_confirmation: newUser.password,
@@ -31,35 +31,36 @@ export default function Form({history}) {
         username: login,
         name: name,
         bio: newUser.bio
-      }
     };
 
     const proxy_url = state.proxy_url;
 
-    fetch(proxy_url+"/register", {
-      method: "POST",
-      body: JSON.stringify(requestData)
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.status === 422) {
-          setData({
-            isLoading: false,
-            errorMessage: "Sorry! Signup failled."
-          });
-        } else {
-          dispatch({
-            type: "LOGOUT"
-          });
-          history.push(`/`);
-        }
-      })
-      .catch(error => {
-        setData({
-          isLoading: false,
-          errorMessage: "Sorry! Signup failled."
-        });
-      });
+    const response = await api.post('/signup', { user });
+    // fetch(proxy_url+"/register", {
+    //   method: "POST",
+    //   body: JSON.stringify(requestData)
+    // })
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     if (response.status === 422) {
+    //       setData({
+    //         isLoading: false,
+    //         errorMessage: "Sorry! Signup failled."
+    //       });
+    //     } else {
+    //       dispatch({
+    //         type: "LOGOUT"
+    //       });
+    //       history.push(`/`);
+    //     }
+    //   })
+    //   .catch(error => {
+    //     setData({
+    //       isLoading: false,
+    //       errorMessage: "Sorry! Signup failled."
+    //     });
+    //   });
+    console.log(response);
   }
 
   function updateEmail(e) {
