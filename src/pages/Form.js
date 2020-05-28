@@ -13,8 +13,8 @@ export default function Form({history}) {
   const { client_id, redirect_uri } = state;
   
   useEffect(() => {
-    if (state.isLoggedIn) {
-      const { avatar_url, name, login, bio } = state.user;
+    if (state.isOauthed) {
+      const { avatar_url, name, login, bio } = state.gituser;
       const value = (bio === null) ? "" : bio;
       setNewUser(prevState => {
         return { ...prevState, bio: value, avatar: avatar_url, name: name, username: login}
@@ -48,8 +48,8 @@ export default function Form({history}) {
         .then(response => response.json())
         .then(data => {
           dispatch({
-            type: "LOGIN",
-            payload: { user: data, isLoggedIn: true }
+            type: "GITLOGIN",
+            payload: { gituser: data, isOauthed: true }
           });
           setData({ ...data, isLoading: false });
         })
@@ -65,7 +65,7 @@ export default function Form({history}) {
   const handleLogout = () => {
     setData({ ...data, isLoading: false });
     dispatch({
-      type: "LOGOUT"
+      type: "GITLOGOUT"
     });
   } 
 
@@ -88,7 +88,7 @@ export default function Form({history}) {
       .then(response => {
         // setData({...data, isLoading: false});
         dispatch({
-          type: "LOGOUT"
+          type: "GITLOGOUT"
         });
         history.push(`/`);
       })
@@ -98,30 +98,6 @@ export default function Form({history}) {
           errorMessage: "Sorry! Signup failled."
         });
       })
-    // fetch(proxy_url+"/register", {
-    //   method: "POST",
-    //   body: JSON.stringify(requestData)
-    // })
-    //   .then(response => response.json())
-    //   .then(response => {
-    // if (response.status === 422) {
-    //   setData({
-    //     isLoading: false,
-    //     errorMessage: "Sorry! Signup failled."
-    //   });
-    // } else {
-    //   dispatch({
-    //     type: "LOGOUT"
-    //   });
-    //   history.push(`/`);
-    // }
-    //   })
-    //   .catch(error => {
-    //     setData({
-    //       isLoading: false,
-    //       errorMessage: "Sorry! Signup failled."
-    //     });
-    //   });
   }
 
   function updateEmail(e) {
@@ -147,7 +123,7 @@ export default function Form({history}) {
 
   return (
     <div className="signup-container">
-      {state.isLoggedIn ? (
+      {state.isOauthed ? (
         <>
           <form onSubmit={handlerSub}>
             <img className="logo" src={Logo} alt="Tinder"/>

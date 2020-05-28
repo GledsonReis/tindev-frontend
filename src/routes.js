@@ -5,6 +5,7 @@ import Signup from './components/Signup';
 import Home from './components/Home';
 import Login from './pages/Login';
 import Form from './pages/Form';
+import List from './pages/List';
 
 export default function Routes() {
   return (
@@ -13,6 +14,7 @@ export default function Routes() {
       <Route path="/" exact component={Login}/>
       <Route path="/signup" component={Signup}/>
       <Route path="/home" component={Home}/>
+      <Route path="/list" component={List}/>
       <Route path="/register" component={Form}/>
     </Switch>
   </Router>

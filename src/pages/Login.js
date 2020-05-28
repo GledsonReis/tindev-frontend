@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from "../App";
+import { Redirect } from "react-router-dom";
+import api from '../services/api';
+import Logo from '../assets/logo.svg';
 import './Login.css';
 
-import api from '../services/api';
-
-import Logo from '../assets/logo.svg';
-
 export default function Login({ history }) {
-  const [username, setUsername] = useState('');
+  const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [data, setData] = useState({ errorMessage: "", isLoading: false });
+  const { state, dispatch } = useContext(AuthContext);
 
   async function handlerSub(e) {
     e.preventDefault();
 
-    const response = await api.post('/devs', {
-      username,
-      password,
-    });
-    const { _id } = response.data;
-
-    history.push(`/list/${_id}`);
+    await api.post('/authenticate', { email, password})
+      .then(response => {
+        dispatch({
+          type: "LOGIN",
+          payload: { user: response.data.user, isLoggedIn: true, token: response.data.auth_token }
+        });
+      })
+      .catch(error => {
+        setData({
+          isLoading: false,
+          errorMessage: "Sorry! Login failed"
+        });
+      })
   }
 
   function handlerClick(e){
@@ -27,17 +35,22 @@ export default function Login({ history }) {
     history.push('/register')
   }
 
+  if (state.isLoggedIn) {
+    return <Redirect to="/list" />;
+  }
+
   return (
     <div className="login-container">
       <form onSubmit={handlerSub}>
         <img src={Logo} alt="Tinder"/>
+        <span className="error">{data.errorMessage}</span>
         <input 
-          placeholder="Digite o nome de usuário"
-          value={username}
+          placeholder="Email"
+          value={email}
           onChange={e => setUsername(e.target.value)}
         />
         <input 
-          placeholder="Digite o nome de usuário"
+          placeholder="Password"
           type="password"
           value={password}
           onChange={e => setPassword(e.target.value)}

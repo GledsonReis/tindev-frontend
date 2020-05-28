@@ -7,7 +7,7 @@ import { AuthContext } from "../App";
 export default function Home() {
   const { state, dispatch } = useContext(AuthContext);
 
-  if (!state.isLoggedIn) {
+  if (!state.isOauthed) {
     return <Redirect to="/signup" />;
   }
 
@@ -15,7 +15,7 @@ export default function Home() {
 
   const handleLogout = () => {
     dispatch({
-      type: "LOGOUT"
+      type: "GITLOGOUT"
     });
   } 
 
