@@ -39,8 +39,8 @@ export default function Signup() {
         .then(response => response.json())
         .then(data => {
           dispatch({
-            type: "LOGIN",
-            payload: { user: data, isLoggedIn: true }
+            type: "GITLOGIN",
+            payload: { user: data, isOauthed: true }
           });
         })
         .catch(error => {
@@ -52,7 +52,7 @@ export default function Signup() {
     }
   }, [state, dispatch, data]);
 
-  if (state.isLoggedIn) {
+  if (state.isOauthed) {
     return <Redirect to="/register" />;
   }
 
