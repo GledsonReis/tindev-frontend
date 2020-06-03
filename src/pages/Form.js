@@ -78,13 +78,12 @@ export default function Form({history}) {
         password: newUser.password,
         password_confirmation: newUser.password,
         avatar: newUser.avatar,
-        username: newUser.login,
+        username: newUser.username,
         name: newUser.name,
         bio: newUser.bio
     };
 
     await api.post('/signup', { user })
-      .then(response => response.json())
       .then(response => {
         // setData({...data, isLoading: false});
         dispatch({
@@ -93,6 +92,7 @@ export default function Form({history}) {
         history.push(`/`);
       })
       .catch(error => {
+        console.log(error)
          setData({
           isLoading: false,
           errorMessage: "Sorry! Signup failled."
