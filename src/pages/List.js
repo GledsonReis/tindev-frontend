@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import './List.css';
 import Logo from '../assets/logo.svg';
 import ItsaMatch from '../assets/itsamatch.svg';
@@ -16,7 +16,8 @@ export default function List({ match }) {
   const token = state.token;
   const isLoggedIn = state.isLoggedIn;
   
-  const handleLogout = () => {
+  async function handleLogout(){
+    await api.delete('/logout')
     dispatch({
       type: "LOGOUT"
     });
@@ -24,11 +25,7 @@ export default function List({ match }) {
 
   useEffect(() => {
     async function loadUsers() {
-      const response = await api.get('/users', {
-        headers: {
-          Authorization: token,
-        }
-      })
+      const response = await api.get('/users')
 
       setUsers(response.data);
     }
