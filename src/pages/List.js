@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-// import io from 'socket.io-client';
 import './List.css';
 import Logo from '../assets/logo.svg';
 import ItsaMatch from '../assets/itsamatch.svg';
@@ -8,6 +7,7 @@ import dislike from '../assets/dislike.png';
 import api from '../services/api';
 import { Link, Redirect } from 'react-router-dom';
 import { AuthContext } from "../App";
+import { ActionCableConsumer } from 'react-actioncable-provider';
 
 export default function List({ match }) {
   const [users, setUsers] = useState([]);
@@ -36,29 +36,36 @@ export default function List({ match }) {
   }, [token]);
 
   // useEffect(() => {
-  //   const socket = io('http://localhost:3333', {
-  //     query: { user: state.user }
-  //   });
+  //   consumer.subscriptions.create({ channel: "MatchChannel", target_id: state.user.id},
+  //   {
+  //     received: (data) => {
+  //     console.log(data)
+  //   }})
+  //   // const socket = io('http://localhost:3333', {
+  //   //   query: { user: state.user }
+  //   // });
 
-  //   socket.on('match', dev => {
-  //     setMatchDev(dev)
-  //   })
-  // }, [state.user.id]);
+  //   // socket.on('match', dev => {
+  //   //   setMatchDev(dev)
+  //   // })
+  // }, [state.user.id, consumer]);
 
   async function handleLike(id) {
-    // await api.post(`/devs/${id}/likes`, null, {
-    //   headers: { user: state.user.id },
-    // })
+    await api.post(`/like`, { target_id: id })
 
     setUsers(users.filter(user => user.id !== id))
   }
   
   async function handleDislike(id) {
-    // await api.post(`/devs/${id}/dislikes`, null, {
-    //   headers: { user: state.user.id },
-    // })
+    await api.post(`dislike`, { target_id: id })
+   
 
     setUsers(users.filter(user => user.id !== id))
+  }
+
+ 
+  function handleReceived(message) {
+    setMatchDev(message)
   }
 
   if (!isLoggedIn) {
@@ -94,6 +101,11 @@ export default function List({ match }) {
       ) : (
         <div className="empty"> Nenhum usúario encontrado. </div>     
       ) }
+      <ActionCableConsumer
+        channel={{channel: "MatchChannel", target_id: state.user.id}}
+        onReceived={handleReceived}
+      >
+      </ActionCableConsumer>
 
       { matchDev && (
         <div className="match-container">
