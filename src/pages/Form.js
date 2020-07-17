@@ -78,7 +78,7 @@ export default function Form({history}) {
         password: newUser.password,
         password_confirmation: newUser.password,
         avatar: newUser.avatar,
-        username: newUser.login,
+        username: newUser.username,
         name: newUser.name,
         bio: newUser.bio
     };
