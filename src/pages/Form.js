@@ -84,7 +84,6 @@ export default function Form({history}) {
     };
 
     await api.post('/signup', { user })
-      .then(response => response.json())
       .then(response => {
         // setData({...data, isLoading: false});
         dispatch({
