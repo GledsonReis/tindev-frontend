@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../App";
 import GithubIcon from "mdi-react/GithubIcon";
 import api from '../services/api';
+import { NotificationManager} from 'react-notifications';
 import Logo from '../assets/logo.svg';
 import './Form.css';
 
@@ -84,12 +85,12 @@ export default function Form({history}) {
     };
 
     await api.post('/signup', { user })
-      .then(response => response.json())
       .then(response => {
         // setData({...data, isLoading: false});
         dispatch({
           type: "GITLOGOUT"
         });
+        NotificationManager.success('Success message', 'Conta criada com sucesso!');
         history.push(`/`);
       })
       .catch(error => {
